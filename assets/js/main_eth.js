@@ -165,6 +165,11 @@ function updateSellPrice(){
         if (eggs > 0) {
             calculateEggSell(eggs,function(sun){
                 devFee(sun,function(fee){
+			if( web3.utils.fromWei(sun) - web3.utils.fromWei(fee) > 0 ){
+				document.getElementById("compoundWarning").style.display = '';
+			}else{
+				document.getElementById("compoundWarning").style.display = 'none';
+			}
                     eggstoselldoc.textContent=formatTrxValue(web3.utils.fromWei(sun) - web3.utils.fromWei(fee))
                 });
             });
